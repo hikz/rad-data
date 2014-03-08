@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+ 	<managed-bean>
+        <managed-bean-name>helloBean</managed-bean-name>
+        <managed-bean-class>
+            com.seetools.presentation.LoginBean
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+     <navigation-rule>
+        <display-name>AddUser</display-name>
+        <from-view-id>/seeHome.xhtml</from-view-id>
+        <navigation-case>
+        <from-action>#{helloBean.welcome}</from-action>
+            <from-outcome>index</from-outcome>
+            <to-view-id>welcome.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>uploadBean</managed-bean-name>
+        <managed-bean-class>
+            com.seetools.presentation.FileUploadBean
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <navigation-rule>
+        <display-name>UploadFile</display-name>
+        <from-view-id>/welcome.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/welcome.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Application Name : <ui:insert name="title">Page Title</ui:insert></title>
+</h:head>
+<h:body>
+	<div id="page" align="center" style="width:1300;height: 700">
+		<table border="1">
+			<tr>
+				<td><div id="header" align="center">
+						<ui:insert name="header">
+							<ui:include src="/header.xhtml" />
+
+						</ui:insert>
+					</div></td>
+			</tr>
+			<tr>
+				<td><div id="menu" align="center">
+						<ui:insert name="seeMenu">
+							<ui:include src="/seeMenu.xhtml" />
+						</ui:insert>
+					</div>efea</td>
+			</tr>
+			<tr valign="top">
+				<td width="200">ed</td>
+				<td width="900" height="700">
+									<ui:insert name="content">
+										Content here
+									</ui:insert>
+				</td>
+				<td width="200">er</td>
+			</tr>
+			<tr>
+				<td><div id="footer" align="center">
+						<ui:insert name="footer">
+							<ui:include src="/footer.xhtml" />
+						</ui:insert>
+					</div></td>
+			</tr>
+		</table>
+	</div>
+</h:body>
+</html>

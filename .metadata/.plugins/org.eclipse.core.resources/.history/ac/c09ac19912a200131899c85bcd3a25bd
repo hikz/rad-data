@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+
+<ui:composition template="/WEB-INF/templates/seeLayout.xhtml">
+		<ui:define name="content">
+			
+				<table width="1304" border="1">
+				<tr>
+					<td height="700" width="200"></td><td height="700" width="904">
+					
+					<f:view>
+		<h:message for="userName" id="myErrors" style="color:red" 
+		showDetail="false" showSummary="true"></h:message>
+		<h:form>
+			<h:outputText value="UserName:"></h:outputText>
+			<h:inputText id="userName" value="${helloBean.name}" required="true"
+				requiredMessage="Name required ramz">
+				<f:validateLength minimum="2" maximum="6"></f:validateLength>
+			</h:inputText>
+		
+			<h:commandButton value="Login" action="${helloBean.welcome}"></h:commandButton>
+		</h:form>
+	</f:view>
+					</td><td height="700" width="200"></td>
+				</tr>
+				
+			</table>
+		</ui:define>
+	</ui:composition>
+	
+<ui:composition template="/WEB-INF/templates/seeLayout.xhtml">
+<table width="1304" border="1">
+<tr><td width="200"></td><td>
+	<div>
+   <ui:define name="content"> 
+     
+  </ui:define>
+</div>
+</td>
+<td width="200"></td>
+</tr>
+</table>
+</ui:composition> 
+
+</body>
+</html>

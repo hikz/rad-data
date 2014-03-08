@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+
+<ui:composition template="/WEB-INF/templates/seeLayout.xhtml">
+	<div>
+   <ui:define name="content">
+     <f:view>
+		<h:message for="userName" id="myErrors" style="color:red" 
+		showDetail="false" showSummary="true"></h:message>
+		<h:form>
+			<h:outputText value="UserName:"></h:outputText>
+			<h:inputText id="userName" value="${helloBean.name}" required="true"
+				requiredMessage="Name required ramz">
+				<f:validateLength minimum="2" maximum="6"></f:validateLength>
+			</h:inputText>
+			<h:inputText id="password" value="${helloBean.name}" required="true"
+				requiredMessage="Name required ramz">
+				<f:validateLength minimum="2" maximum="6"></f:validateLength>
+			</h:inputText>
+			
+			<h:commandButton value="Login" action="${helloBean.welcome}"></h:commandButton>
+		</h:form>
+	</f:view>
+   </ui:define>
+</div>
+</ui:composition>
+
+</body>
+</html>

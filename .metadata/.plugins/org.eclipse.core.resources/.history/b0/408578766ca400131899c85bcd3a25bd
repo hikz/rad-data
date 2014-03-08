@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+
+</head>
+<body>
+	<ui:composition>
+				<table width="1300">
+				<tr>
+					<td width="200" align="center"><b>Select SEE Tools</b><div id="toolDropDown" class="toolsDropDownMenu">
+							<h:outputStylesheet>
+						        .optionList {
+						        height: 22px;
+						        }
+						        .vertical-menu-cell {
+						        padding: 0px 0px 0px 0px;
+						        width: 190px;
+						        }
+						        
+						        .toolsDropDownMenu{
+						        position:absolute
+						        }
+    						</h:outputStylesheet>
+    						<h:form>
+							<!-- <h:outputText value="SEE Tools"/> -->
+							<h:panelGrid styleClass="vertical-menu-cell"
+								columnClasses="optionList" columns="1" cellspacing="0"
+								cellpadding="0">
+								
+								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight" submitMode="ajax"
+									label="Proton" style="border:1px solid #{a4jSkin.panelBorderColor}">
+									<rich:menuItem label="BGR1" action="#{loginBean.welcome}" style="border:1px">
+									<f:facet name="icon">
+										<table border="1">
+										<tr><td><h:commandLink action="#{loginBean.welcome}">Proton Ion Density</h:commandLink></td></tr>
+										<tr><td>There would be some data in here which will explain the tool in short
+										description.</td></tr>
+										<tr><td><h:graphicImage library="images" name="middle01.jpg" height="200" width="200"/></td></tr>
+										</table>
+									</f:facet>
+									</rich:menuItem>
+								</rich:dropDownMenu>
+								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
+									style="border:1px solid #{a4jSkin.panelBorderColor}"
+									label="Neutron" mode="client">
+									<rich:menuItem label="BGR" />
+								</rich:dropDownMenu>
+								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
+									style="border:1px solid #{a4jSkin.panelBorderColor}"
+									label="Heavy Ion" mode="client">
+									<rich:menuItem label="7 Parameter Weibull" />
+									<rich:menuItem label="Dual Node/Double Bit Upset rate" />
+									<rich:menuItem label="Peterson FOM" />
+								</rich:dropDownMenu>
+								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
+									style="border:1px solid #{a4jSkin.panelBorderColor}"
+									label="General Tools" mode="client">
+									<rich:menuItem label="Ion Density Profile" />
+									<rich:menuItem label="Radiation Data Base" />
+								</rich:dropDownMenu>
+							</h:panelGrid>
+						</h:form>
+						</div></td>
+					<td><a href="#">Home</a></td>
+					<td><a href="#">Services</a></td>
+					<td><a href="#">About Us</a></td>
+					<td><a href="#">FAQ</a></td>
+					<td width="200"></td>
+				</tr>
+				</table>
+	</ui:composition>
+</body>
+</html>

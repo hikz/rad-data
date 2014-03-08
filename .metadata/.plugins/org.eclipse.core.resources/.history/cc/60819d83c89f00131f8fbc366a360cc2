@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+	<ui:composition template="/WEB-INF/templates/seeLayout.xhtml">
+		<ui:define name="content">
+			<table width="1304" border="1">
+				<tr>
+					<td width="400"></td>
+					<td><rich:tabPanel switchType="client">
+							<rich:tab header="SEE Tools" styleClass="navigation-tab">
+								<h:outputStylesheet>
+						        .optionList {
+						        height: 22px;
+						        }
+						 
+						        .vertical-menu-cell {
+						        padding: 0px 4px 0px 4px;
+						        width: 200px;
+						        float:left
+						        }
+						        
+						        .navigation-tab {
+						        width:1200px;
+						        height: 600px
+						        }
+    						</h:outputStylesheet>
+								<h:panelGrid styleClass="vertical-menu-cell"
+									columnClasses="optionList" columns="1" cellspacing="0"
+									cellpadding="0">
+									<br></br>
+									<rich:dropDownMenu jointPoint="topRight"
+										direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="Proton" mode="client">
+										<rich:menuItem label="Hip Converter" />
+									</rich:dropDownMenu>
+									<rich:dropDownMenu jointPoint="topRight"
+										direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="Neutron" mode="client">
+										<rich:menuItem label="BGR" />
+									</rich:dropDownMenu>
+									<rich:dropDownMenu jointPoint="topRight"
+										direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="Heavy Ion" mode="client">
+										<rich:menuItem label="7 Parameter Weibull" />
+										<rich:menuItem label="Dual Node/Double Bit Upset rate" />
+										<rich:menuItem label="Peterson FOM" />
+									</rich:dropDownMenu>
+									<rich:dropDownMenu jointPoint="topRight"
+										direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="General Tools" mode="client">
+										<rich:menuItem label="Ion Density Profile" />
+										<rich:menuItem label="Radiation Data Base" />
+									</rich:dropDownMenu>
+								</h:panelGrid>
+							</rich:tab>
+							<rich:tab header="Home" styleClass="navigation-tab">
+						           All Home details here
+						        </rich:tab>
+							<rich:tab header="Services" styleClass="navigation-tab">
+						           Services we provide 
+						        </rich:tab>
+							<rich:tab header="About Us" styleClass="navigation-tab">
+						           What you should know about us
+						        </rich:tab>
+							<rich:tab header="FAQ" styleClass="navigation-tab">
+						           If you have any questions and frequently asked
+						    </rich:tab>
+						</rich:tabPanel></td>
+					<td width="400"></td>
+				</tr>
+			</table>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

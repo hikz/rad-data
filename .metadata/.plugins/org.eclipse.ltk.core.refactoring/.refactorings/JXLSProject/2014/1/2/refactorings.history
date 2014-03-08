@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;NewTest.java&apos; to &apos;JXLSSample/src/com.munir.jxls.simple&apos;&#x0D;&#x0A;- Original project: &apos;JXLSProject&apos;&#x0D;&#x0A;- Destination element: &apos;JXLSSample/src/com.munir.jxls.simple&apos;&#x0D;&#x0A;- Original element: &apos;com.munir.jxls.simple.NewTest.java&apos;" description="Copy compilation unit" destination="=JXLSSample/src&lt;com.munir.jxls.simple" element1="/src\/main\/java&lt;com.munir.jxls.simple{NewTest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1389112681566" units="1" version="1.0"/>
+</session>
