@@ -43,7 +43,7 @@ public class SeeToolsServiceImpl {
 		//String inputFileName  = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/input/hipconverter_reader_input.xls"; 
 		
 		InputStream inputXML = new BufferedInputStream(new FileInputStream(configFileName));
-        XLSReader mainReader =  ReaderBuilder.buildFromXML( inputXML );
+        XLSReader mainReader =  ReaderBuilder.buildFromXML(inputXML);
         InputStream inputXLS = new BufferedInputStream(inputStream);
        
         HipconverterFinalInput hipconverterFinalInput = new HipconverterFinalInput();
