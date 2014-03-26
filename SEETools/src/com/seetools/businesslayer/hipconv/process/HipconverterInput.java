@@ -1,7 +1,13 @@
 package com.seetools.businesslayer.hipconv.process;
 
-public class HipconverterInput {
+import java.io.Serializable;
 
+public class HipconverterInput implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double xsec;
 	private double let;
 	private double energy;

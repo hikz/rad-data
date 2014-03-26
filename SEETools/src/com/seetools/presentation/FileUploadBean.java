@@ -1,51 +1,52 @@
 package com.seetools.presentation;
 
-
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.LogarithmicAxis;
+import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.block.ColumnArrangement;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.ui.HorizontalAlignment;
-import org.jfree.ui.RectangleEdge;
+import org.jfree.ui.RectangleInsets;
 
 import com.seetools.businesslayer.SeeToolsServiceImpl;
 import com.seetools.businesslayer.hipconv.process.HipconverterFinalOutput;
 import com.seetools.businesslayer.hipconv.process.HipconverterOutput;
+import com.seetools.presentation.common.SessionManager;
 
 @ManagedBean
-@SessionScoped
-public class FileUploadBean  implements Serializable  {
+@RequestScoped
+public class FileUploadBean implements Serializable {
 
-	 private Part inputFile;
-	 private HipconverterFinalOutput hipconverterFinalOutput;
-	 private boolean display = false;
-
-	 public Part getInputFile() {
-		return inputFile;
-	}
-
-	public void setInputFile(Part inputFile) {
-		this.inputFile = inputFile;
-	}
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private Part inputFile;	
+	private HipconverterFinalOutput hipconverterFinalOutput;
+	private boolean display = false;
 	
+
 	public HipconverterFinalOutput getHipconverterFinalOutput() {
 		return hipconverterFinalOutput;
 	}
@@ -54,7 +55,14 @@ public class FileUploadBean  implements Serializable  {
 			HipconverterFinalOutput hipconverterFinalOutput) {
 		this.hipconverterFinalOutput = hipconverterFinalOutput;
 	}
-		
+
+	public Part getInputFile() {
+		return inputFile;
+	}
+
+	public void setInputFile(Part inputFile) {
+		this.inputFile = inputFile;
+	}
 
 	public boolean isDisplay() {
 		return display;
@@ -64,72 +72,38 @@ public class FileUploadBean  implements Serializable  {
 		this.display = display;
 	}
 
-	public String upload() {        
-		
+	
+	public String upload() {
+
 		String status = new String();
-		try{
-	    	SeeToolsServiceImpl seeToolsServiceImpl = new SeeToolsServiceImpl();		
-			this.setHipconverterFinalOutput(seeToolsServiceImpl.processFileUpload(inputFile));
+		try {
+			SeeToolsServiceImpl seeToolsServiceImpl = new SeeToolsServiceImpl();
+			this.setHipconverterFinalOutput(seeToolsServiceImpl
+					.processFileUpload(inputFile));
 			
-			if(this.getHipconverterFinalOutput().getHipconverterOutputList().size() > 0){
+			if (this.getHipconverterFinalOutput().getHipconverterOutputList()
+					.size() > 0) {
+				SessionManager.addSessionAttribute("hipconverterFinalOutput", this.getHipconverterFinalOutput());
 				System.out.println("display is setting true");
 				this.setDisplay(true);
 			}
-			return "welcome";
-	    }catch (Exception e){
-	    	e.printStackTrace();
-	    }		
+			return "hipConverterTool";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return status;
 	}
-	
+
 	public void drawChart(OutputStream out, Object data) throws IOException {
 
-		XYSeries series1 = new XYSeries("First");
-		if(this.getHipconverterFinalOutput().getHipconverterOutputList().size() > 0){
-		int i=0;
-		for(HipconverterOutput hipconverterOutput:this.getHipconverterFinalOutput().getHipconverterOutputList()){
-			if(i!=0){
-				series1.add(hipconverterOutput.getEnergy(),hipconverterOutput.getProtonCrossSection());
-			}
-			i++;
-		}
+		HipconverterFinalOutput hipconverterFinalOutput = (HipconverterFinalOutput)SessionManager.getSessionAttribute("hipconverterFinalOutput");
+		SeeToolsServiceImpl seeToolsServiceImpl = new SeeToolsServiceImpl();
 		
-		
-		//Displaying the data series
-		for(int j=0;j<series1.getItemCount();j++){
-			System.out.println("X-value : "+ series1.getX(j));
-			System.out.println("Y-value : " + series1.getY(j));
+			BufferedImage bufferedImage = seeToolsServiceImpl.getChart(hipconverterFinalOutput).createBufferedImage(500, 500);
+			ImageIO.write(bufferedImage, "gif", out);
+			out.flush();
+			out.close();
 		}
-		XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(series1);
 	
-		JFreeChart chart = ChartFactory.createXYLineChart("Hip Converter Chart", "Energy", "Proton Cross Section",
-				dataset, PlotOrientation.VERTICAL,true,true,false);
-		
-		 final XYPlot plot = chart.getXYPlot();
-	     final NumberAxis rangeAxis = new LogarithmicAxis("Energy (MeV)");
-	     final NumberAxis domainAxis = new LogarithmicAxis("Log(Proton Cross Section (cm-2))");
-	     //DecimalFormat numFormat = new DecimalFormat("0.##E0");
-	        //     rangeAxis.setNumberFormatOverride(numFormat);
-	     //domainAxis.setNumberFormatOverride(numFormat);
-	     plot.setDomainAxis(rangeAxis);
-	     plot.setRangeAxis(domainAxis);
-	     System.out.println("***********************************8");
-	        //   rangeAxis.setNumberFormatOverride(numFormat);
-	     plot.setDomainGridlinePaint(Color.BLACK);
-	     plot.setRangeGridlinePaint(Color.BLACK);
-	     plot.setBackgroundPaint(Color.white);
 
-	     TextTitle source = new TextTitle("© Copyright 2013, The Radiation Group, All rights reserved");
-	     source.setFont(new Font("SansSerif", Font.PLAIN, 10));
-	     source.setPosition(RectangleEdge.BOTTOM);
-	     source.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-	     chart.addSubtitle(source);
-	     chart.setBackgroundPaint(Color.CYAN);
-	        
-	    BufferedImage bufferedImage = chart.createBufferedImage(200,200);
-	    ImageIO.write(bufferedImage, "gif", out);
-	  }
-	}
-	
 }

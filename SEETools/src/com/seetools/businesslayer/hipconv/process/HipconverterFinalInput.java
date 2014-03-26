@@ -1,10 +1,15 @@
 package com.seetools.businesslayer.hipconv.process;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HipconverterFinalInput {
+public class HipconverterFinalInput implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	List<HipconverterInput> hipconverterInputList = new ArrayList<HipconverterInput>();
 	private int numberOfBits;
 	

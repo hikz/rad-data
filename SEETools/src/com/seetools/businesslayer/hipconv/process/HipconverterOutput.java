@@ -1,8 +1,9 @@
 package com.seetools.businesslayer.hipconv.process;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class HipconverterOutput {
+public class HipconverterOutput implements Serializable {
 
 	private double energy;
 	private double protonCrossSection;

@@ -14,9 +14,10 @@
 </head>
 <body>
 	<ui:composition>
+	<h:form>
 				<table width="1300" border="1">
 				<tr>
-					<td width="200" align="center"><b>Select SEE Tools1</b><div id="toolDropDown" class="toolsDropDownMenu">
+					<td width="200" align="center"><b>Select SEE Tools</b><div id="toolDropDown" class="toolsDropDownMenu">
 							<h:outputStylesheet>
 						        .optionList {
 						        height: 22px;
@@ -30,7 +31,7 @@
 						        position:absolute
 						        }
     						</h:outputStylesheet>
-    						<h:form>
+    						
 							<!-- <h:outputText value="SEE Tools"/> -->
 							<h:panelGrid styleClass="vertical-menu-cell"
 								columnClasses="optionList" columns="1" cellspacing="0"
@@ -71,15 +72,16 @@
 									<rich:menuItem label="Ion Density Profile" />
 								</rich:dropDownMenu>
 							</h:panelGrid>
-						</h:form>
+						
 						</div></td>
 					<td width="225" align="center"><a href="#">Home</a></td>
 					<td width="225" align="center"><a href="#">Services</a></td>
 					<td width="225" align="center"><a href="#">About Us</a></td>
 					<td width="225" align="center"><a href="#">FAQ</a></td>
-					<td width="200" align="center"></td>
+					<td width="200" align="center"><h:commandLink action="#{loginBean.logout}">Logout</h:commandLink></td>
 				</tr>
 				</table>
+				</h:form>
 	</ui:composition>
 </body>
 </html>

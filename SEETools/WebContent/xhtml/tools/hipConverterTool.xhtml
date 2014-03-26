@@ -30,7 +30,7 @@
 								<h:inputFile value="#{fileUploadBean.inputFile}"  requiredMessage="File not selected !!"/>
 								<br/>
 								<h:commandButton value="Upload"
-									action="#{fileUploadBean.upload()}" />
+									action="#{fileUploadBean.upload()}" />															
 							</h:form>
 						
 							<br></br>
@@ -52,10 +52,12 @@
 								</h:dataTable>
 								
 								<rich:panel>
-									<a4j:mediaOutput style="width:500px;height:500px;"
+									<a4j:mediaOutput style="width:500px;height:500px;" 
 										element="img" cacheable="false" session="true"
 										createContent="#{fileUploadBean.drawChart}"
-										mimeType="image/gif" />
+										mimeType="image/jpeg" >
+										<!-- <f:param name="outputList" value="#{fileUploadBean.hipconverterFinalOutput.hipconverterOutputList}"></f:param> -->
+										</a4j:mediaOutput>
 								</rich:panel>
 							</h:panelGrid>
 						</div>
