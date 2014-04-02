@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+ 	
+    <!-- Enable Spring -->
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>
+    
+    <managed-bean>
+        <managed-bean-name>loginBean</managed-bean-name>
+        <managed-bean-class>
+            com.seetools.presentation.LoginBean
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <!-- Simple Navigation Rule -->
+    <!-- If  user keys in ToSecure, move to /pages/secure/secured.xhtml-->
+    <!-- Else If user keys in ToUnSecure, move to /pages/unsecure/unsecured.xhtml-->
+    <navigation-rule>
+        <display-name>pages/home/home.xhtml</display-name>
+        <from-view-id>/seeHome.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{loginBean.welcome}</from-action>
+            <from-outcome>notLoggedIn</from-outcome>
+            <to-view-id>/xhtml/login/login.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+        	<from-action>#{loginBean.welcome}</from-action>
+        	<from-outcome>alreadyLoggedIn</from-outcome>
+        	<to-view-id>/xhtml/tools/hipConverterTool.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <display-name>pages/home/home.xhtml</display-name>
+        <from-view-id>/xhtml/login/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{loginBean.login}</from-action>
+            <from-outcome>loginSuccess</from-outcome>
+            <to-view-id>/xhtml/tools/hipConverterTool.xhtml</to-view-id>
+            <redirect></redirect>
+        </navigation-case>
+        <navigation-case>
+        	<from-action>#{loginBean.login}</from-action>
+        	<from-outcome>failure</from-outcome>
+        	<to-view-id>/xhtml/login/error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+</faces-config>
