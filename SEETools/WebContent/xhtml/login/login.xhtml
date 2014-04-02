@@ -14,32 +14,29 @@
 </head>
 <body>
 
-	<ui:composition template="/WEB-INF/templates/seeLayout.xhtml">
+	<ui:composition template="/xhtml/common/seeLayout.xhtml">
 		<ui:define name="content">
 			<f:view>
 				<h:form id="seeLoginFormId" prependId="false">
 					<div id="loginFieldsPnlId">
 						<div id="loginFieldUsrContId">
-							<h:outputText id="seeUserNameId" name="seeUserNameNm"
-								value="UserName:"></h:outputText>
-							<h:inputText id="userName" value="${loginBean.name}"
+							<h:outputText id="seeUserNameId" value="UserName:"></h:outputText>
+							<h:inputText id="userName" value="#{loginBean.name}"
 								required="true" requiredMessage="Name required ramz">
 								<f:validateLength minimum="2" maximum="6"></f:validateLength>
 							</h:inputText>
 						</div>
 						<div id="loginFieldPasswordContId">
-							<h:outputText id="seePasswordId" value="Password:"
-								name="seePasswordNm"></h:outputText>
+							<h:outputText id="seePasswordId" value="Password:"></h:outputText>
 							<h:inputSecret id="password" required="true"
 								value="#{loginBean.password}"
 								requiredMessage="Please enter password"></h:inputSecret>
-							<h:outputLabel id="outLblPasswordId" for="password"
-								name="outLblPasswordNm"></h:outputLabel>
+
 						</div>
 					</div>
 					<div id="loginBtnPanelId">
-						<h:commandButton value="Login" action="${loginBean.login}"></h:commandButton>
-						<h:commandButton value="Reset" action="${loginBean.login}"></h:commandButton>
+						<h:commandButton value="Login" action="#{loginBean.login}"></h:commandButton>
+						<h:commandButton value="Reset" action="#{loginBean.login}"></h:commandButton>
 					</div>
 				</h:form>
 				<h:message for="userName" id="myErrors" style="color:red"

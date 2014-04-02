@@ -2,9 +2,7 @@ package com.seetools.presentation;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,10 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.seetools.presentation.common.SessionManager;
-
-@ManagedBean
-@RequestScoped
 public class LoginBean implements Serializable {
 
 	 
@@ -47,23 +41,24 @@ public class LoginBean implements Serializable {
 		//boolean isLoggedIn = false;
 		
 		if(!this.isLoggedIn()){
-			return "/xhtml/login/login";
+			return "notLoggedIn";
+			//return "/xhtml/login/login";
 		} else {
-			return "/xhtml/tools/hipConverterTool";
+			return "alreadyLoggedIn";
+			//return "/xhtml/tools/hipConverterTool";
 		}
 	}
 	
 	public String login(){
 		String loginNavigation = "";
 		 try {
-	            /*Authentication request = new UsernamePasswordAuthenticationToken(this.getName(), this.getPassword());
-	            Authentication result = authenticationManager.authenticate(request);
-	            SecurityContextHolder.getContext().setAuthentication(result);*/
-			 	if(this.getName().equals("munir") && this.getPassword().equals("munir")){
-			 		this.setLoggedIn(true);
-		            loginNavigation = "/xhtml/tools/hipConverterTool";
-			 	}
-	            
+			 
+			 	Authentication result = null;
+	            Authentication request = new UsernamePasswordAuthenticationToken(this.getName(), this.getPassword());
+	            result = authenticationManager.authenticate(request);
+	            SecurityContextHolder.getContext().setAuthentication(result);
+	            this.setLoggedIn(true);
+	            loginNavigation = "loginSuccess";
 	        } catch (AuthenticationException e) {
 	            loginNavigation = "failure";
 	        	e.printStackTrace();
@@ -72,7 +67,8 @@ public class LoginBean implements Serializable {
 	}
 	
 	public String logout(){
-		SessionManager.logout();
+		 
+		SecurityContextHolder.clearContext();
 		return "/xhtml/login/login";
 	}
 
@@ -91,4 +87,5 @@ public class LoginBean implements Serializable {
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
 }
