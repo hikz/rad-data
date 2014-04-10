@@ -7,16 +7,56 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:a4j="http://richfaces.org/a4j">
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
 
-</head>
-<body>
+ <script src="jquery.js"></script>
+
+
+</h:head>
+<h:body>
+
+
 	<ui:composition template="/xhtml/common/seeLayout.xhtml">
 		<ui:define name="content">
-			<h:graphicImage library="images" name="middle01.jpg" height="400" width="800"/>
+		 <h:outputScript library="js" name="homeCarousal.js" target="head"></h:outputScript>	
+		
+			<div id="carousel">
+				<table>
+					<tr>
+						<td>
+							<div id="buttons_left">
+								<a href="#" id="prev"><img
+									src="resources/images/left_arrow.jpg" alt="left link"
+									width="32" height="32" /></a>
+							</div>
+						</td>
+						<td>
+							<div id="slides">
+								<ul>
+									<li><img src="resources/images/image1.jpg" width="600"
+										height="500" alt="Slide 1" /></li>
+									<li><img src="resources/images/image2.jpg" width="600"
+										height="500" alt="Slide 2" /></li>
+									<li><img src="resources/images/image3.jpg" width="600"
+										height="500" alt="Slide 3" /></li>
+								</ul>
+							</div>
+						</td>
+						<td>
+							<div id="buttons_right">
+								<a href="#" id="next"><img
+									src="resources/images/right_arrow.jpg" alt="right link"
+									width="32" height="32" /></a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<h:outputStylesheet library="css" name="homeCarousal.css"> </h:outputStylesheet>
+			<h:outputScript name="jquery.js" ></h:outputScript>
 		</ui:define>
 	</ui:composition>
-</body>
+</h:body>
 </html>
