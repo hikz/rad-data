@@ -21,16 +21,13 @@
 					<div id="loginFieldsPnlId">
 						<div id="loginFieldUsrContId">
 							<h:outputText id="seeUserNameId" value="UserName:"></h:outputText>
-							<h:inputText id="userName" value="#{loginBean.name}"
-								required="true" requiredMessage="Name required ramz">
-								<f:validateLength minimum="2" maximum="6"></f:validateLength>
+							<h:inputText id="j_username">
+								<!-- <f:validateLength minimum="2" maximum="6"></f:validateLength> -->
 							</h:inputText>
 						</div>
 						<div id="loginFieldPasswordContId">
 							<h:outputText id="seePasswordId" value="Password:"></h:outputText>
-							<h:inputSecret id="password" required="true"
-								value="#{loginBean.password}"
-								requiredMessage="Please enter password"></h:inputSecret>
+							<h:inputSecret id="j_password"></h:inputSecret>
 
 						</div>
 					</div>
@@ -38,9 +35,13 @@
 						<h:commandButton value="Login" action="#{loginBean.login}"></h:commandButton>
 						<h:commandButton value="Reset" action="#{loginBean.login}"></h:commandButton>
 					</div>
-				</h:form>
-				<h:message for="userName" id="myErrors" style="color:red"
-					showDetail="false" showSummary="true"></h:message>
+					
+						
+					No Account?  <h:commandLink action="#{navigator.navigate}" value="Click me to register">
+										 <f:param name="fromTool" value="register" /> 
+										</h:commandLink>
+					</h:form>
+				
 			</f:view>
 		</ui:define>
 	</ui:composition>

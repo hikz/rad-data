@@ -17,8 +17,8 @@
 	<h:form>
 				<table width="1300" border="1">
 				<tr>
-					<td width="200" align="center"><b>Select SEE Tools</b><div id="toolDropDown" class="toolsDropDownMenu">
-							<h:outputStylesheet>
+					<td width="200" align="center"><b>Select SEE Tools</b><div id="toolDropDown">
+						<!-- 	<h:outputStylesheet>
 						        .optionList {
 						        height: 22px;
 						        }
@@ -30,19 +30,21 @@
 						        .toolsDropDownMenu{
 						        position:absolute
 						        }
-    						</h:outputStylesheet>
+    						</h:outputStylesheet> -->
     						
 							<!-- <h:outputText value="SEE Tools"/> -->
-							<h:panelGrid styleClass="vertical-menu-cell"
+							<!-- <h:panelGrid styleClass="vertical-menu-cell"
 								columnClasses="optionList" columns="1" cellspacing="0"
 								cellpadding="0">
 								
 								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight" submitMode="ajax"
 									label="Proton" style="border:1px solid #{a4jSkin.panelBorderColor}">
-									<rich:menuItem action="#{loginBean.welcome}" style="border:1px">
+									<rich:menuItem  action="#{navigator.navigate}"  style="border:1px">
 									<f:facet name="icon">
 										<table>
-										<tr><td><h:commandLink action="#{loginBean.welcome}">Proton Ion Density</h:commandLink></td></tr>
+										<tr><td><h:commandLink action="#{navigator.navigate}" value="Proton Ion Density">
+										 <f:param name="fromTool" value="hipConverter" /> 
+										</h:commandLink></td></tr>
 										<tr><td width="200">There would be some data in here which will explain the tool in short
 										description. <br></br>There would be some data in here which will explain the tool in short
 										description.</td></tr>
@@ -51,30 +53,30 @@
 									</f:facet>
 									</rich:menuItem>
 								</rich:dropDownMenu>
-								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
-									style="border:1px solid #{a4jSkin.panelBorderColor}"
-									label="Neutron" mode="client">
-									<rich:menuItem label="BGR" />
-								</rich:dropDownMenu>
-								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
-									style="border:1px solid #{a4jSkin.panelBorderColor}"
-									label="Heavy Ion" mode="client">
-									<rich:menuItem label="HICUP" />
-									<rich:menuItem label="Dual Node/Double Bit Upset rate" />
-								</rich:dropDownMenu>
-								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
-									style="border:1px solid #{a4jSkin.panelBorderColor}"
-									label="Radiation Database" mode="client">
-								</rich:dropDownMenu>
-								<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
-									style="border:1px solid #{a4jSkin.panelBorderColor}"
-									label="Ion Tracks" mode="client">
-									<rich:menuItem label="Ion Density Profile" />
-								</rich:dropDownMenu>
-							</h:panelGrid>
+								
+									<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="Heavy Ion" mode="client">
+										<rich:menuItem label="HICUP" />
+										<rich:menuItem label="Dual Node/Double Bit Upset rate" />
+									</rich:dropDownMenu>
+									<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="Radiation Database" mode="client">
+									</rich:dropDownMenu>
+									<rich:dropDownMenu jointPoint="topRight" direction="bottomRight"
+										style="border:1px solid #{a4jSkin.panelBorderColor}"
+										label="Ion Tracks" mode="client">
+										<rich:menuItem label="Ion Density Profile" />
+									</rich:dropDownMenu>
+							</h:panelGrid> -->
 						
 						</div></td>
-					<td width="225" align="center"><a href="#">Home</a></td>
+					<td width="225" align="center">
+						<h:commandLink action="seeHome" value="Home" >
+										 <!-- <f:param name="fromTool" value="hipConverter" />  -->
+						</h:commandLink>
+						<!-- <a href="#">Home</a>--></td>
 					<td width="225" align="center"><a href="#">Services</a></td>
 					<td width="225" align="center"><a href="#">About Us</a></td>
 					<td width="225" align="center"><a href="#">FAQ</a></td>

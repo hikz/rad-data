@@ -19,8 +19,8 @@
 	    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-                /WEB-INF/jsfspring-sec-bean-config.xml
-                /WEB-INF/jsfspring-sec-security-config.xml
+                /WEB-INF/seetools-bean-config.xml
+                /WEB-INF/seetools-security-config.xml
         </param-value>
     </context-param>
     <!-- CONFIGURATION FILES END HERE -->
@@ -58,28 +58,13 @@
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     
     
 	<!-- spring security related - end -->
 	
-	
-	<!-- <servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.faces</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping> -->
 	<context-param>
 		<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -104,4 +89,10 @@
 		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
 	</listener>
  -->
+ 
+	 <session-config>
+	    <session-timeout>2</session-timeout>
+	    <tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+ 
 </web-app>

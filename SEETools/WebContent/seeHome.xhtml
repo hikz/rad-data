@@ -11,17 +11,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
 
- <script src="jquery.js"></script>
-
-
 </h:head>
 <h:body>
 
 
 	<ui:composition template="/xhtml/common/seeLayout.xhtml">
 		<ui:define name="content">
-		 <h:outputScript library="js" name="homeCarousal.js" target="head"></h:outputScript>	
-		
+		 
+		<h:outputStylesheet library="css" name="homeCarousal.css"> </h:outputStylesheet>
+		<h:outputScript library="js" name="homeCarousal.js" target="head"></h:outputScript>	
 			<div id="carousel">
 				<table>
 					<tr>
@@ -54,8 +52,25 @@
 					</tr>
 				</table>
 			</div>
-			<h:outputStylesheet library="css" name="homeCarousal.css"> </h:outputStylesheet>
-			<h:outputScript name="jquery.js" ></h:outputScript>
+			
+			
+			<div id="Tools_Blocks">
+			<h:form>
+			<table>
+			<tr>
+			<td>Proton Converter</td><td>Neutron Convertor</td>
+			</tr>
+			<tr>
+			<td><h:commandLink action="#{navigator.navigate}" value="Proton Ion Density">
+										 <f:param name="fromTool" value="hipConverter" /> 
+										</h:commandLink></td>
+			<td><h:commandLink action="#{navigator.navigate}" value="Neutron Ion Density">
+										 <f:param name="fromTool" value="neutronConverter" /> 
+										</h:commandLink></td>
+			</tr>
+			</table>
+			</h:form>
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>
