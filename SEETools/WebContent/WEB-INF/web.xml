@@ -91,8 +91,12 @@
  -->
  
 	 <session-config>
-	    <session-timeout>2</session-timeout>
+	    <session-timeout>1</session-timeout>
 	    <tracking-mode>COOKIE</tracking-mode>
 	</session-config>
  
+ <!-- To manage session concurrency and allow spring security to take over. -->
+ 	<listener>
+     <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 </web-app>
