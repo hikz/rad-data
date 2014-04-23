@@ -2,13 +2,12 @@ package com.seetools.businesslayer;
 
 import java.awt.Color;
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.text.DecimalFormat;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.Part;
@@ -18,7 +17,6 @@ import net.sf.jxls.reader.XLSReadStatus;
 import net.sf.jxls.reader.XLSReader;
 import net.sf.jxls.transformer.XLSTransformer;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
@@ -28,7 +26,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.LogarithmicAxis;
 import org.jfree.chart.block.ColumnArrangement;
 import org.jfree.chart.plot.PlotOrientation;
@@ -43,25 +40,29 @@ import com.seetools.businesslayer.hipconv.process.HipconverterFinalInput;
 import com.seetools.businesslayer.hipconv.process.HipconverterFinalOutput;
 import com.seetools.businesslayer.hipconv.process.HipconverterInput;
 import com.seetools.businesslayer.hipconv.process.HipconverterOutput;
-import com.seetools.presentation.common.SessionManager;
+import com.seetools.framework.HIXTemplateResource;
+import com.seetools.framework.HIXTemplateResourceManager;
 
 public class SeeToolsServiceImpl {
 
+	private static final String configFileName = "hipConverterInputConfig.xml";
+
 	public HipconverterFinalOutput processFileUpload(Part inputFile)
 			throws Exception {
-		writeOutput(inputFile.getInputStream());
-		return readOutput();
+
+		printClassPath();
+		return processData(inputFile.getInputStream());
 	}
 
 	private static HipconverterFinalInput readInput(InputStream inputStream,
 			int numberOfBits) throws Exception {
 
-		String configFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/input_config/hipconverter_sampleInput.xml";
 		// String inputFileName =
 		// "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/input/hipconverter_reader_input.xls";
 
-		InputStream inputXML = new BufferedInputStream(new FileInputStream(
-				configFileName));
+		/*InputStream inputXML = new BufferedInputStream(new FileInputStream(
+				configFileName));*/
+		InputStream inputXML = SeeToolsServiceImpl.class.getClassLoader().getResourceAsStream(configFileName);
 		XLSReader mainReader = ReaderBuilder.buildFromXML(inputXML);
 		InputStream inputXLS = new BufferedInputStream(inputStream);
 
@@ -93,28 +94,42 @@ public class SeeToolsServiceImpl {
 		return hipconverterFinalInput;
 	}
 
-	private void writeOutput(InputStream inputStream) throws Exception {
+	private HipconverterFinalOutput processData(InputStream inputStream) throws Exception  {
 
-		String templateFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/output_templates/hipconverterTemplate.xls";
-		String destFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/output/hipconverterOutput.xls";
-		HipconverterFinalInput hipconverterFinalInput = readInput(inputStream,
-				8);
-		int numberOfBits = 8;
-		hipconverterFinalInput.setNumberOfBits(numberOfBits);
+		HIXTemplateResource resource = null;
 
-		Map<String, HipconverterFinalInput> beans = new HashMap<String, HipconverterFinalInput>();
-		beans.put("hipconverterFinalInput", hipconverterFinalInput);
-		XLSTransformer transformer = new XLSTransformer();
-		transformer.transformXLS(templateFileName, beans, destFileName);
-		System.out.println("Your are done");
+		try {
+			/*String templateFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/output_templates/hipconverterTemplate.xls";
+				String destFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/output/hipconverterOutput.xls";*/
+			HipconverterFinalInput hipconverterFinalInput = readInput(
+					inputStream, 8);
+			int numberOfBits = 8;
+			hipconverterFinalInput.setNumberOfBits(numberOfBits);
+			Map<String, HipconverterFinalInput> beans = new HashMap<String, HipconverterFinalInput>();
+			beans.put("hipconverterFinalInput", hipconverterFinalInput);
+			XLSTransformer transformer = new XLSTransformer();
+			resource = HIXTemplateResourceManager
+					.getInstance().getHIXTemplate();
+			Workbook workbook = transformer.transformXLS(resource.getStream(),
+					beans);
+			HipconverterFinalOutput output = processWorkbook(workbook);
+			System.out.println("Your are done");
+			return output;
+		} finally {
+			if(resource!=null)
+			{
+				HIXTemplateResourceManager
+				.getInstance().recycle(resource);
+			}
+		}
 	}
 
-	private HipconverterFinalOutput readOutput() throws Exception {
+	private HipconverterFinalOutput processWorkbook(Workbook wb) throws Exception {
 
-		String outputFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/output/hipconverterOutput.xls";
+		/*String outputFileName = "C:/Ramz_Trainingz/JXLS/HIPCONVERTOR_PROJECT/FILES/output/hipconverterOutput.xls";
 
 		FileInputStream fis = new FileInputStream(outputFileName);
-		Workbook wb = new HSSFWorkbook(fis);
+		Workbook wb = new HSSFWorkbook(fis);*/
 		Sheet sheet = wb.getSheetAt(0);
 		FormulaEvaluator evaluator = wb.getCreationHelper()
 				.createFormulaEvaluator();
@@ -226,7 +241,7 @@ public class SeeToolsServiceImpl {
 			plot.setDomainAxis(domainAxis);
 			plot.setRangeAxis(rangeAxis);
 
-			
+
 
 			// Legend details
 			LegendTitle legendTitle = chart.getLegend();
@@ -242,9 +257,20 @@ public class SeeToolsServiceImpl {
 			chart.getTitle().setFont(rangeAxis.getLabelFont());
 			chart.getTitle().setExpandToFitSpace(true);
 			chart.setPadding(new RectangleInsets(10, 10, 10, 10));
-		
+
 		}
 		return chart;
 	}
 
+
+	private void printClassPath()
+	{
+		ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+		URL[] urls = ((URLClassLoader)cl).getURLs();
+
+		for(URL url: urls){
+			System.out.println(url.getFile());
+		}
+	}
 }
