@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<h:head>
+	<title>Application Name : <ui:insert name="title">Page Title</ui:insert></title>
+	<h:outputScript name="jquery.js"></h:outputScript>
+</h:head>
+<h:body>
+
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		template="/xhtml/common/seeLayout.xhtml">
+
+		<ui:define name="mainContent">
+		
+			<div id="page" align="center" style="width: 1300; height: 590">
+				<table style="border: thin solid black;">
+					<tr>
+						<td>
+							<table>
+								<tr>
+									<td width="200" style="vertical-align: top">
+										<!-- <ui:include src="/xhtml/tools/seeToolsMenu.xhtml"/>  -->
+
+										<h:form>
+											<div style="vertical-align: top; border-color: red">
+											
+												<rich:accordion switchType="client">
+													<rich:accordionItem header="Proton Ions">
+														<ul>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="HIP Converter 1">
+																	<f:param name="fromTool" value="hipConverter" />
+																</h:commandLink></li>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="HIP Converter 2">
+																	<f:param name="fromTool" value="hipConverter" />
+																</h:commandLink></li>
+														</ul>
+
+													</rich:accordionItem>
+													<rich:accordionItem header="Neutron Tools">
+														<ul>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="BGR">
+																	<f:param name="fromTool" value="neutronConverter" />
+																</h:commandLink></li>
+														</ul>
+													</rich:accordionItem>
+													<rich:accordionItem header="Heavy Ion Tools">
+														<ul>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="HICUP Converter">
+																	<f:param name="fromTool" value="neutronConverter" />
+																</h:commandLink></li>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="Dual Node/Double Bit Upset Rate">
+																	<f:param name="fromTool" value="neutronConverter" />
+																</h:commandLink></li>
+														</ul>
+													</rich:accordionItem>
+													<rich:accordionItem header="General Tools">
+														<ul>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="Ion Density Profile">
+																	<f:param name="fromTool" value="neutronConverter" />
+																</h:commandLink></li>
+															<li><h:commandLink action="#{navigator.navigate}"
+																	value="Radiation Database">
+																	<f:param name="fromTool" value="neutronConverter" />
+																</h:commandLink></li>
+														</ul>
+													</rich:accordionItem>
+												</rich:accordion>
+											</div>
+										</h:form>
+
+
+									</td>
+									
+									<td style="border-left: thin solid #ff0000;"></td>
+									<td width="1000" align="center">
+									<ui:insert name="toolcontent">
+											<!-- <ui:include src="/xhtml/tools/hipConverterTool.xhtml"/> -->
+									</ui:insert></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

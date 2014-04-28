@@ -20,14 +20,15 @@
         <sec:intercept-url pattern="/xhtml/common/**" access="isAnonymous()"/>
         <!-- form-login will override default settings which means the default login page provided
              by spring -->                
-        <sec:form-login login-page="/xhtml/login/login.xhtml" authentication-failure-url="/xhtml/login/error.xhtml"/>
+        <sec:form-login login-page="/xhtml/login/login.xhtml" login-processing-url="/xhtml/login/tools_login" username-parameter="tools_username"
+        			password-parameter="tools_password"  authentication-failure-url="/xhtml/login/error.xhtml"/>
         
         <!-- To manage session time out and does not allow more than one concurrent session. -->
-        <sec:session-management>
-        	<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/xhtml/common/sessionTimeOut.xhtml"/>	
+        <sec:session-management> <!-- invalid-session-url="/xhtml/errors/sessionTimeOut.xhtml" -->
+        	<sec:concurrency-control max-sessions="1"  expired-url="/xhtml/errors/concurrentSessionError.xhtml"/>	
         </sec:session-management>
          <!-- authentication-success-handler-ref="customAuthenticationSuccessHandler"/> -->
-        <sec:logout logout-success-url="/xhtml/login/login.xhtml" delete-cookies="JSESSIONID" invalidate-session="false"></sec:logout>
+        <sec:logout logout-success-url="/xhtml/login/login.xhtml" logout-url="/tools_logout" delete-cookies="JSESSIONID"></sec:logout>
         <!-- <csrf/> -->
     </sec:http>
      

@@ -13,14 +13,12 @@
 
 </h:head>
 <h:body>
-
-
 	<ui:composition template="/xhtml/common/seeLayout.xhtml">
-		<ui:define name="content">
+		<ui:define name="mainContent">
 		 
 		<h:outputStylesheet library="css" name="homeCarousal.css"> </h:outputStylesheet>
 		<h:outputScript library="js" name="homeCarousal.js" target="head"></h:outputScript>	
-			<div id="carousel">
+			<div id="carousel" align="center" style="border: solid">
 				<table>
 					<tr>
 						<td>
@@ -54,17 +52,17 @@
 			</div>
 			
 			
-			<div id="Tools_Blocks">
+			<div id="Tools_Blocks" align="center">
 			<h:form>
 			<table>
 			<tr>
 			<td>Proton Converter</td><td>Neutron Convertor</td>
 			</tr>
 			<tr>
-			<td><h:commandLink action="#{navigator.navigate}" value="Proton Ion Density">
+			<td><h:commandLink action="#{navigator.navigate}" value="Proton Ion Density" >
 										 <f:param name="fromTool" value="hipConverter" /> 
 										</h:commandLink></td>
-			<td><h:commandLink action="#{navigator.navigate}" value="Neutron Ion Density">
+			<td><h:commandLink action="#{navigator.navigate}" value="Neutron Ion Density"> 
 										 <f:param name="fromTool" value="neutronConverter" /> 
 										</h:commandLink></td>
 			</tr>

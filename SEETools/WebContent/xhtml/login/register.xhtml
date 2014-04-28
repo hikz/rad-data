@@ -21,7 +21,7 @@
 					<div id="RegisterFieldsPnlId">
 						<div id="FirstNameId">
 							<h:outputText id="seeFirstNameLblId" value="First Name:"></h:outputText>
-							<h:inputText id="seeFirstNameInId" required="true" value="#{registerBean.firstName}" 
+							<h:inputText id="seeFirstNameInId" required="true" value="#{registerBean.user.firstName}" 
 							requiredMessage="First Name required">
 								<f:validateLength maximum="20"></f:validateLength>
 							</h:inputText>
@@ -29,7 +29,7 @@
 						<br></br>
 						<div id="LastNameId">
 							<h:outputText id="seeLastNameLblId" value="Last Name:"></h:outputText>
-							<h:inputText id="seeLastNameInId" required="true" value="#{registerBean.lastName}" 
+							<h:inputText id="seeLastNameInId" required="true" value="#{registerBean.user.lastName}" 
 							 requiredMessage="Last Name required">
 								<f:validateLength maximum="20"></f:validateLength>
 							</h:inputText>
@@ -37,7 +37,7 @@
 						<br></br>
 						<div id="MobileNumberId">
 							<h:outputText id="seeMobileNumberLblId" value="Mobile Number:"></h:outputText>
-							<h:inputText id="seeMobileNumberInId" required="true" value="#{registerBean.mobileNumber}" 
+							<h:inputText id="seeMobileNumberInId" required="true" value="#{registerBean.user.mobileNumber}" 
 							requiredMessage="Last Name required">
 								<f:validateLength maximum="10"></f:validateLength>
 							</h:inputText>
@@ -45,7 +45,7 @@
 						<br></br>
 						<div id="EmailAddressId">
 							<h:outputText id="seeEmailAddressLblId" value="Email Address:"></h:outputText>
-							<h:inputText id="seeEmailAddressInId" value="#{registerBean.emailAddress}"
+							<h:inputText id="seeEmailAddressInId" value="#{registerBean.user.email.emailAddress}"
 								required="true" requiredMessage="Email Address required">
 								<f:validateRegex
 									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -55,7 +55,7 @@
 						<div id="loginFieldPasswordContId">
 							<h:outputText id="seePasswordLblId" value="Password:"></h:outputText>
 							<h:inputSecret id="seePasswordInId" required="true" 
-							value="#{registerBean.password}" requiredMessage="Please enter password"></h:inputSecret>
+							value="#{registerBean.user.password}" requiredMessage="Please enter password"></h:inputSecret>
 						</div>
 					</div>
 					<br></br>
@@ -64,7 +64,7 @@
 					
 					</div>
 				</h:form>
-				
+				<h:messages></h:messages>
 			</f:view>
 		</ui:define>
 	</ui:composition>

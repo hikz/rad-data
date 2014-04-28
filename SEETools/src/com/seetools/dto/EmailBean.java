@@ -3,7 +3,7 @@ package com.seetools.dto;
 import java.sql.Timestamp;
 
 
-public class EmailDTO {
+public class EmailBean {
 	private String emailID;
 	private String emailAddress;
 	private String createdByUserId;

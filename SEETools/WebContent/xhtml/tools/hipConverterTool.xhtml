@@ -15,23 +15,20 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:h="http://java.sun.com/jsf/html"
-		template="/xhtml/common/seeLayout.xhtml">
-
-		<ui:define name="title">Hip converter Page</ui:define>
-		<ui:define name="content">
-			<table>
+		template="/xhtml/tools/seeContentLayout.xhtml">
+   
+		<ui:define name="toolcontent">
+			<table width="900" height="620">
+				<tr>	<td><h:outputText value="#{loginBean.name}"></h:outputText></td></tr>
+				<tr>
+					<td align="center" height="50">Hip converter Page</td>
+				</tr>
 				
 				<tr>
-					<td align="center">Hip converter Page</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td width="900" height="650" valign="top" align="center">
+					<td  valign="top" align="center">
 						<div>
 							<h:form enctype="multipart/form-data">
-								<h:inputFile value="#{fileUploadBean.inputFile}"  requiredMessage="File not selected !!"/>
+								<h:inputFile value="#{fileUploadBean.inputFile}" requiredMessage="File not selected !!"/>
 								<br/>
 								<h:commandButton value="Upload"
 									action="#{fileUploadBean.upload()}" />															
@@ -56,7 +53,7 @@
 								</h:dataTable>
 								
 								<rich:panel>
-									<a4j:mediaOutput style="width:500px;height:500px;" 
+									<a4j:mediaOutput style="width:450px;height:450px;" 
 										element="img" cacheable="false" session="true"
 										createContent="#{fileUploadBean.drawChart}"
 										mimeType="image/jpeg" >
@@ -67,7 +64,8 @@
 						</div>
 					</td>
 				</tr>
-				<tr><td width="225" align="center"><a href="#">Download Output File</a></td></tr>
+				<!-- <tr><td><h:messages></h:messages></td></tr> -->
+				<!-- <tr><td width="225" align="center"><a href="#">Download Output File</a></td></tr> -->
 			</table>
 		</ui:define>
 	</ui:composition>

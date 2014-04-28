@@ -15,8 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import com.seetools.daolayer.mapper.UserMapper;
-import com.seetools.dto.UserDTO;
+import com.seetools.dto.UserBean;
 
 @Repository
 public class LoginDAOImpl implements UserDetailsService {
@@ -36,16 +35,20 @@ public class LoginDAOImpl implements UserDetailsService {
 		try{
 		this.jdbcTemplate =  new JdbcTemplate(dataSource);
 		LoginRowCallBackHandler loginRowCallBackHandler = new LoginRowCallBackHandler();
-		this.jdbcTemplate.query( "select u.*,e.emailAddress from user u inner join email e where e.emailID = u.emailID and u.UserID = ?",new Object[]{username}, loginRowCallBackHandler);
+		this.jdbcTemplate.query( "select u.*,e.emailAddress from user u inner join email e where e.emailID = u.emailID and e.emailAddress = ?",new Object[]{username}, loginRowCallBackHandler);
 		
-		/*UserDTO userDto = this.jdbcTemplate.queryForObject(
+		/*UserBean userDto = this.jdbcTemplate.queryForObject(
 		        "select * from user where UserID = ?",
 		        new Object[]{username},new UserMapper());*/
 		
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		
-		UserDTO userDto = loginRowCallBackHandler.getUserDto();
+		UserBean userDto = loginRowCallBackHandler.getUserDto();
+		
+		if(userDto == null){
+			throw new UsernameNotFoundException("Invalid Credentials. Please try again");
+		}
 		user = new User(userDto.getUserId(), userDto.getPassword(), true, true, true, true, authorities);
 
 		}
@@ -54,9 +57,6 @@ public class LoginDAOImpl implements UserDetailsService {
 			e.printStackTrace();
 		}
 		
-		catch(Exception e){
-			e.printStackTrace();
-		}
 		return user;
 	}
 

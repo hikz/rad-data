@@ -13,14 +13,14 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.seetools.dto.UserDTO;
+import com.seetools.dto.UserBean;
 
 public class RegisterDAOImpl {
 
 	private DataSource  dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
-	public UserDTO registerUser(final UserDTO userDto){
+	public UserBean registerUser(final UserBean userDto){
 		final String REGISTER_EMAIL_INSERT_STMT = 
 			"INSERT INTO EMAIL(EmailAddress,CreatedByUserID,CreatedDate,ModifiedByUserID,ModifiedDate) VALUES (?,?,?,?,?)";
 		final String REGISTER_USER_INSERT_STMT = 
@@ -38,11 +38,11 @@ public class RegisterDAOImpl {
 				  public PreparedStatement createPreparedStatement(Connection connection)
 				      throws SQLException {
 				    PreparedStatement ps = connection.prepareStatement(REGISTER_EMAIL_INSERT_STMT, Statement.RETURN_GENERATED_KEYS);
-				    ps.setString(1,userDto.getEmailDto().getEmailAddress());
-				    ps.setString(2,userDto.getEmailDto().getCreatedByUserId());
-				    ps.setTimestamp(3,userDto.getEmailDto().getCreatedDate());
-				    ps.setString(4,userDto.getEmailDto().getModifiedByUserId());
-				    ps.setTimestamp(5,userDto.getEmailDto().getModifiedDate());
+				    ps.setString(1,userDto.getEmail().getEmailAddress());
+				    ps.setString(2,userDto.getEmail().getCreatedByUserId());
+				    ps.setTimestamp(3,userDto.getEmail().getCreatedDate());
+				    ps.setString(4,userDto.getEmail().getModifiedByUserId());
+				    ps.setTimestamp(5,userDto.getEmail().getModifiedDate());
 				    return ps;
 				  }
 				}, emailKeyHolder);

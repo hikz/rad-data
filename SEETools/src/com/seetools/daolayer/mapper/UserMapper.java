@@ -5,15 +5,15 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.seetools.dto.EmailDTO;
-import com.seetools.dto.UserDTO;
+import com.seetools.dto.EmailBean;
+import com.seetools.dto.UserBean;
 
-public class UserMapper implements RowMapper<UserDTO> {
+public class UserMapper implements RowMapper<UserBean> {
 
 	@Override
-	public UserDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		UserDTO userDto = new UserDTO();
-		EmailDTO emailDto = new EmailDTO();
+	public UserBean mapRow(ResultSet rs, int rowNum) throws SQLException {
+		UserBean userDto = new UserBean();
+		EmailBean emailDto = new EmailBean();
 		emailDto.setEmailAddress(rs.getString("EmailAddress"));
 		userDto.setEmailDto(emailDto);
 		userDto.setUserId(rs.getString("UserID"));

@@ -6,59 +6,31 @@
 
 <h:head>
 	<title>Application Name : <ui:insert name="title">Page Title</ui:insert></title>
-	<h:outputScript name="jquery.js" ></h:outputScript>
+	<h:outputScript name="jquery.js"></h:outputScript>
 </h:head>
 <h:body>
+	<div id="main_layout" align="center" style="width: 1300; height: 900;">
+		<div id="header" align="center" style="width:100%;height:130px;">
+			<!-- <ui:insert name="header"> -->
+				<ui:include src="/xhtml/common/header.xhtml" />
 
-	<div id="page" align="center" style="width: 1300; height: 650">
-		<table>
-			<tr>
-				<td><div id="header" align="center">
-						<ui:insert name="header">
-							<ui:include src="/xhtml/common/header.xhtml" />
+			<!-- </ui:insert> -->
+		</div>
+		<div id="menu" align="center" style="width:100%;height:65px;%;">
+			<!-- <ui:insert name="seeMenu"> -->
+				<ui:include src="/xhtml/common/seeMenu.xhtml" />
+			<!-- </ui:insert> -->
+		</div>
 
-						</ui:insert>
-					</div></td>
-			</tr>
-			<tr>
-				<td><div id="menu" align="center">
-						<ui:insert name="seeMenu">
-							<ui:include src="/xhtml/common/seeMenu.xhtml" />
-						</ui:insert>
-					</div></td>
-			</tr>
-			<tr>
-				<td>
-					<table>
-						<tr>
-							<td width="200" height="650">
-								<ui:insert name="blank">
-									<ui:include src="/xhtml/common/blank.xhtml" />
-								</ui:insert>
-							</td>
-							<td style="border-left: thin solid #ff0000;"></td>
-							<td width="900" height="650" align="center">
-								<ui:insert name="content">
-										Content here
-								</ui:insert></td>
-							<td style="border-left: thin solid #ff0000;"></td>
-							<td width="200" height="650" align="center">
-								<ui:insert name="advertisement">
-									<ui:include src="/xhtml/common/advertisement.xhtml" />
-								</ui:insert>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td><div id="footer" align="center">
-						<ui:insert name="footer">
-							<ui:include src="/xhtml/common/footer.xhtml" />
-						</ui:insert>
-					</div></td>
-			</tr>
-		</table>
+		<div id="mainContent" align="center" style="width:100%;height:640px;vertical-align: middle;">
+			<ui:insert name="mainContent"></ui:insert>
+		</div>
+		
+		<div id="footer" align="center" style="width:100%;height:65px;">
+			<!-- <ui:insert name="footer"> -->
+				<ui:include src="/xhtml/common/footer.xhtml" />
+			<!-- </ui:insert> -->
+		</div>
 	</div>
 </h:body>
 </html>

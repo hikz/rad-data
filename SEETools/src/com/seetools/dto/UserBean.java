@@ -2,7 +2,7 @@ package com.seetools.dto;
 
 import java.sql.Timestamp;
 
-public class UserDTO {
+public class UserBean {
 
 	private String userId;
 	private String password;
@@ -16,7 +16,7 @@ public class UserDTO {
 	private String modifiedByUserId;
 	private Timestamp modifiedDate;
 	
-	private EmailDTO emailDto;
+	private EmailBean email = new EmailBean();
 	
 	public String getUserId() {
 		return userId;
@@ -79,11 +79,11 @@ public class UserDTO {
 	public void setModifiedDate(Timestamp modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	public EmailDTO getEmailDto() {
-		return emailDto;
+	public EmailBean getEmail() {
+		return email;
 	}
-	public void setEmailDto(EmailDTO emailDto) {
-		this.emailDto = emailDto;
+	public void setEmailDto(EmailBean email) {
+		this.email = email;
 	}
 	
 	

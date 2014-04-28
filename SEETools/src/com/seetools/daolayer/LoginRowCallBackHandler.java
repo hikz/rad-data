@@ -5,18 +5,18 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowCallbackHandler;
 
-import com.seetools.dto.EmailDTO;
-import com.seetools.dto.UserDTO;
+import com.seetools.dto.EmailBean;
+import com.seetools.dto.UserBean;
 
 public class LoginRowCallBackHandler implements RowCallbackHandler {
 
-	UserDTO userDto = new UserDTO();
+	UserBean userDto;
 	
 	@Override
 	public void processRow(ResultSet rs) throws SQLException {
 		
-		
-		EmailDTO emailDto = new EmailDTO();
+		userDto = new UserBean();
+		EmailBean emailDto = new EmailBean();
 		emailDto.setEmailAddress(rs.getString("EmailAddress"));
 		userDto.setEmailDto(emailDto);
 		userDto.setUserId(rs.getString("UserID"));
@@ -32,11 +32,11 @@ public class LoginRowCallBackHandler implements RowCallbackHandler {
 		userDto.setModifiedDate(rs.getTimestamp("ModifiedDate"));
 	}
 
-	public UserDTO getUserDto() {
+	public UserBean getUserDto() {
 		return userDto;
 	}
 
-	public void setUserDto(UserDTO userDto) {
+	public void setUserDto(UserBean userDto) {
 		this.userDto = userDto;
 	}
 

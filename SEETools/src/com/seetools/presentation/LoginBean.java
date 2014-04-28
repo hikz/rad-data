@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -21,15 +22,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.context.request.RequestContextHolder;
 
 @ManagedBean
 @SessionScoped
-public class LoginBean implements Serializable, UserDetails {
+public class LoginBean implements Serializable {
 
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String password;
-	
 
 	
 	@ManagedProperty(value="#{authenticationManager}")
@@ -63,15 +69,28 @@ public class LoginBean implements Serializable, UserDetails {
 	            
 	            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 
-	            RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
+	            RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/xhtml/login/tools_login");
 
+	            System.out.println("session id - " + context.getSessionId(true));
+	            System.out.println("session id - " + RequestContextHolder.currentRequestAttributes().getSessionId());
 	            dispatcher.forward((ServletRequest) context.getRequest(),
 	                    (ServletResponse) context.getResponse());
-
+	            
 	            FacesContext.getCurrentInstance().responseComplete();
-
+	            
+	            /*System.out.println("session id - " +((WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails())
+	    		        .getSessionId());*/
+	            
+	            
 	            return null;
-	        }catch (BadCredentialsException bce){
+	        }catch (UsernameNotFoundException unfe) {
+	        	FacesMessage badCredentialsMessage = new FacesMessage("Invalid credentials. Please login again");
+	        	FacesContext.getCurrentInstance().addMessage(null, badCredentialsMessage);
+	        	loginNavigation = "failure";
+	        }
+		 	catch (BadCredentialsException bce){
+	        	FacesMessage badCredentialsMessage = new FacesMessage("Invalid credentials. Please login again");
+	        	FacesContext.getCurrentInstance().addMessage(null, badCredentialsMessage);
 	        	loginNavigation = "failure";
 	        	//bce.printStackTrace();
 	        }
@@ -82,11 +101,7 @@ public class LoginBean implements Serializable, UserDetails {
 		 return loginNavigation;
 	}
 	
-	public String logout(){
-		 
-		SecurityContextHolder.clearContext();
-		return "/xhtml/login/login";
-	}
+	
 
 	public String getPassword() {
 		return password;
@@ -111,42 +126,5 @@ public class LoginBean implements Serializable, UserDetails {
 	public void setUserDetailsService(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 }

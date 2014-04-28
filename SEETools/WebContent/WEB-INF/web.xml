@@ -24,7 +24,7 @@
         </param-value>
     </context-param>
     <!-- CONFIGURATION FILES END HERE -->
-    <!-- PROJECT STAGE START FOR DEVELOPEMENT MARK IT AS DEVELOPMENT, FOR TESTING, UAT, PRODUCTION REMOVE THIS -->
+    <!-- PROJECT STAGE START FOR DEVELOPEMENT MARK IT AS DEVELOPMENT - Other values are PRODUCTION,SYSTEMTEST,UNITTEST-->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
@@ -59,9 +59,15 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>FORWARD</dispatcher>
-    <dispatcher>REQUEST</dispatcher>
+    	<dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     
+    <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/tools_logout</url-pattern>
+</filter-mapping>
+
+
     
 	<!-- spring security related - end -->
 	
@@ -84,6 +90,11 @@
 		<param-value>enable</param-value>
 	</context-param>
 
+	<!-- To overcome ViewExpiredException -->
+	<error-page>
+	    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+	    <location>/xhtml/login/login.xhtml</location>
+	</error-page>
 	
 	<!-- <listener>
 		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>

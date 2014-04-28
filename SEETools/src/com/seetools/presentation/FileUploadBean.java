@@ -1,34 +1,17 @@
 package com.seetools.presentation;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.LogAxis;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.block.ColumnArrangement;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.ui.RectangleInsets;
-
 import com.seetools.businesslayer.SeeToolsServiceImpl;
 import com.seetools.businesslayer.hipconv.process.HipconverterFinalOutput;
-import com.seetools.businesslayer.hipconv.process.HipconverterOutput;
 import com.seetools.presentation.common.SessionManager;
 
 @ManagedBean
