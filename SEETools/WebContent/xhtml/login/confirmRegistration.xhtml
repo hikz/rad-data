@@ -45,10 +45,10 @@
 					</div>
 					<br></br>
 					<div id="loginBtnPanelId">
+					 	<h:commandButton action="#{navigator.navigate}" value="Edit">
+							 <f:setPropertyActionListener target="#{navigator.fromTool}" value="register" /> 
+						</h:commandButton>
 						<h:commandButton value="Confirm" action="#{registerBean.register}"></h:commandButton>
-					 	<h:commandLink action="#{navigator.navigate}" value="Click me to register">
-							 <f:param name="fromTool" value="register" /> 
-						</h:commandLink>
 					</div>
 				</h:form>
 				<h:messages></h:messages>
