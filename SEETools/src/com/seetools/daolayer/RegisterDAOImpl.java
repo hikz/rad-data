@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 import javax.sql.DataSource;
 
@@ -89,6 +90,21 @@ public class RegisterDAOImpl {
 		return userDto;
 	}
 
+	public boolean updateRegistrationActivation(String email,String token){
+		
+		boolean active = false;
+		final String UPDATE_REGISTRATION_ACTIVATION = "update user set enabled = 'Y' where " + 
+				"emailid = (select emailid from email where emailaddress = ?)";
+		
+		this.jdbcTemplate =  new JdbcTemplate(dataSource);
+		
+		int rows = this.jdbcTemplate.update(UPDATE_REGISTRATION_ACTIVATION, new Object[]{email},new int[]{Types.VARCHAR});
+		
+		if(rows == 1){
+			active = true;
+		}
+		return active;
+	}
 	public DataSource getDataSource() {
 		return dataSource;
 	}

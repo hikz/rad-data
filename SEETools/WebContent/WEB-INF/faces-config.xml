@@ -106,6 +106,13 @@
     		<to-view-id>/xhtml/tools/neutronConverter.xhtml</to-view-id>
     		<redirect></redirect>
     	</navigation-case>
+    	
+    	<navigation-case>
+    		<from-outcome>registrationActivation</from-outcome>
+    		<to-view-id>/xhtml/login/registrationActivation.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    	
     	</navigation-rule>
     
 </faces-config>

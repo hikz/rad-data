@@ -39,4 +39,17 @@ public class SeeToolsRegisterServiceImpl {
 		SendEmail sendEmail = new SendEmail();
 		sendEmail.sendEmail(emailAddress);
 	}
+	
+	public boolean registrationActivation(String email,String token){
+		
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("seetools-bean-config.xml");
+		
+		RegisterDAOImpl registerDAOImpl = (RegisterDAOImpl)applicationContext.getBean("seeToolsRegisterDAO");
+		
+		applicationContext.close();
+		
+		return registerDAOImpl.updateRegistrationActivation(email, token);
+		
+		
+	}
 }

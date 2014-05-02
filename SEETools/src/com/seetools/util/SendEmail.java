@@ -100,7 +100,9 @@ public class SendEmail {
  
    // first part  (the html)
    BodyPart messageBodyPart = new MimeBodyPart();
-   String htmlText = "Hello SEE TOOLS Visitor. Welcome to SEE Tools website. Please click here to activate your registration";
+   String url = "http://localhost:8080/SEETools/xhtml/login/registrationActivation.xhtml?email=" + emailAddress +"&token=abv6570";
+   String htmlText = "Hello Visitor. Welcome to SEE Tools website. Please click here to activate your registration";
+   htmlText = htmlText + "<html><body><a href="+url+">Click here to complete your registration</a></body></html>";
    messageBodyPart.setContent(htmlText, "text/html");
  
    // add it

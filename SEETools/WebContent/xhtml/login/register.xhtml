@@ -25,6 +25,7 @@
 							requiredMessage="First Name required">
 								<f:validateLength maximum="20"></f:validateLength>
 							</h:inputText>
+							<h:message for="seeFirstNameInId"></h:message>							
 						</div>
 						<br></br>
 						<div id="LastNameId">
@@ -33,6 +34,7 @@
 							 requiredMessage="Last Name required">
 								<f:validateLength maximum="20"></f:validateLength>
 							</h:inputText>
+							<h:message for="seeLastNameInId"></h:message>	
 						</div>
 						<br></br>
 						<div id="MobileNumberId">
@@ -41,6 +43,7 @@
 							requiredMessage="Last Name required">
 								<f:validateLength maximum="10"></f:validateLength>
 							</h:inputText>
+							<h:message for="seeMobileNumberInId"></h:message>	
 						</div>
 						<br></br>
 						<div id="EmailAddressId">
@@ -50,12 +53,14 @@
 								<f:validateRegex
 									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							</h:inputText>
+								<h:message for="seeEmailAddressInId"></h:message>	
 						</div>
 						<br></br>
 						<div id="loginFieldPasswordContId">
 							<h:outputText id="seePasswordLblId" value="Password:"></h:outputText>
 							<h:inputSecret id="seePasswordInId" required="true" 
 							value="#{user.password}" requiredMessage="Please enter password"></h:inputSecret>
+								<h:message for="seePasswordInId"></h:message>
 						</div>
 					</div>
 					<br></br>
@@ -63,7 +68,6 @@
 						<h:commandButton value="Register" action="#{registerBean.confirmRegistration}"></h:commandButton>
 					</div>
 				</h:form>
-				<h:messages></h:messages>
 			</f:view>
 		</ui:define>
 	</ui:composition>
