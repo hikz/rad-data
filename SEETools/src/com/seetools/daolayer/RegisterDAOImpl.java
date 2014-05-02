@@ -21,16 +21,16 @@ public class RegisterDAOImpl {
 	private JdbcTemplate jdbcTemplate;
 	
 	public UserBean registerUser(final UserBean userDto){
+		
 		final String REGISTER_EMAIL_INSERT_STMT = 
 			"INSERT INTO EMAIL(EmailAddress,CreatedByUserID,CreatedDate,ModifiedByUserID,ModifiedDate) VALUES (?,?,?,?,?)";
 		final String REGISTER_USER_INSERT_STMT = 
-			"INSERT INTO USER(EmailID,FirstName,LastName,MobileNumber,Password,MembershipID,CreatedByUserID,CreatedDate,ModifiedByUserID,ModifiedDate) "
-			+ "values (?,?,?,?,?,?,?,?,?,?)";
+			"INSERT INTO USER(EmailID,FirstName,LastName,MobileNumber,Password,MembershipID,Enabled,CreatedByUserID,CreatedDate,ModifiedByUserID,ModifiedDate) "
+			+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 		try{
 			this.jdbcTemplate =  new JdbcTemplate(dataSource);
-			//Object[] emailParams = new Object[]{userDto.getEmailDto().getEmailAddress(),userDto.getEmailDto().getCreatedByUserId(),userDto.getEmailDto().getCreatedDate(),
-			//                                userDto.getEmailDto().getModifiedByUserId(),userDto.getEmailDto().getModifiedDate()};
-			//this.jdbcTemplate.update(REGISTER_EMAIL_INSERT_STMT, emailParams);
+			
+			//KeyHolder to hold generated primary keys for email and user data.
 			KeyHolder emailKeyHolder = new GeneratedKeyHolder();
 			KeyHolder userKeyHolder = new GeneratedKeyHolder();
 			
@@ -61,10 +61,11 @@ public class RegisterDAOImpl {
 				    ps.setString(4,userDto.getMobileNumber());
 				    ps.setString(5,userDto.getPassword());
 				    ps.setString(6,null);
-				    ps.setString(7,userDto.getCreatedByUserId());
-				    ps.setTimestamp(8,userDto.getCreatedDate());
-				    ps.setString(9,userDto.getModifiedByUserId());
-				    ps.setTimestamp(10,userDto.getModifiedDate());
+				    ps.setString(7,"N");
+				    ps.setString(8,userDto.getCreatedByUserId());
+				    ps.setTimestamp(9,userDto.getCreatedDate());
+				    ps.setString(10,userDto.getModifiedByUserId());
+				    ps.setTimestamp(11,userDto.getModifiedDate());
 				    return ps;
 				  }
 				}, userKeyHolder);

@@ -17,9 +17,11 @@ import javax.servlet.ServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,16 +29,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 @ManagedBean
 @SessionScoped
-public class LoginBean implements Serializable {
+public class LoginBean implements Serializable, UserDetails {
 
-	 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private String name;
+	private String email;
 	private String password;
-
+	private String firstName;
 	
 	@ManagedProperty(value="#{authenticationManager}")
     private AuthenticationManager authenticationManager = null;
@@ -45,12 +43,12 @@ public class LoginBean implements Serializable {
 	    private UserDetailsService userDetailsService = null;
 	
 	
-	public String getName() {
-		return name;
+	public String getEmail() {
+		return email;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
@@ -76,11 +74,14 @@ public class LoginBean implements Serializable {
 	            dispatcher.forward((ServletRequest) context.getRequest(),
 	                    (ServletResponse) context.getResponse());
 	            
+	            Authentication auth = (Authentication)SecurityContextHolder.getContext().getAuthentication();
+	            if(auth != null){
+	            	System.out.println(((User)auth.getPrincipal()).getUsername());
+		            System.out.println(auth.getName());
+		    		this.setFirstName(auth.getName());	
+	            }
+	            
 	            FacesContext.getCurrentInstance().responseComplete();
-	            
-	            /*System.out.println("session id - " +((WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails())
-	    		        .getSessionId());*/
-	            
 	            
 	            return null;
 	        }catch (UsernameNotFoundException unfe) {
@@ -125,6 +126,51 @@ public class LoginBean implements Serializable {
 
 	public void setUserDetailsService(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		Authentication auth = (Authentication)SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 }

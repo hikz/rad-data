@@ -26,6 +26,7 @@ public class LoginRowCallBackHandler implements RowCallbackHandler {
 		userDto.setLastName(rs.getString("LastName"));
 		userDto.setMobileNumber(rs.getString("MobileNumber"));
 		userDto.setMembershipId(rs.getString("MembershipID"));
+		userDto.setEnabled(rs.getString("Enabled"));
 		userDto.setCreatedByUserId(rs.getString("CreatedByUserID"));
 		userDto.setCreatedDate(rs.getTimestamp("CreatedDate"));
 		userDto.setModifiedByUserId(rs.getString("ModifiedByUserId"));

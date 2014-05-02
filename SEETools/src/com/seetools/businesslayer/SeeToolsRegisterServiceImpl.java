@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.seetools.daolayer.RegisterDAOImpl;
 import com.seetools.dto.UserBean;
 import com.seetools.presentation.common.SEEUtilities;
+import com.seetools.util.SendEmail;
 
 public class SeeToolsRegisterServiceImpl {
 
@@ -23,6 +24,19 @@ public class SeeToolsRegisterServiceImpl {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("seetools-bean-config.xml");
 		
 		RegisterDAOImpl registerDAOImpl = (RegisterDAOImpl)applicationContext.getBean("seeToolsRegisterDAO");
-		return registerDAOImpl.registerUser(userDto);
+		
+		
+		//TODO Need to have transactions.
+		UserBean user =  registerDAOImpl.registerUser(userDto);
+		applicationContext.close();
+
+		this.sendRegistrationConfirmationEmail(user.getEmail().getEmailAddress());
+		return user;
+	}
+	
+	private void sendRegistrationConfirmationEmail(String emailAddress){
+		
+		SendEmail sendEmail = new SendEmail();
+		sendEmail.sendEmail(emailAddress);
 	}
 }

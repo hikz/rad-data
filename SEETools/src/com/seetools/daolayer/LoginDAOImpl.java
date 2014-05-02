@@ -32,10 +32,11 @@ public class LoginDAOImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 		System.out.println("Inside main method fro db");
 		UserDetails user = null;
+		boolean enabled = false;
 		try{
 		this.jdbcTemplate =  new JdbcTemplate(dataSource);
 		LoginRowCallBackHandler loginRowCallBackHandler = new LoginRowCallBackHandler();
-		this.jdbcTemplate.query( "select u.*,e.emailAddress from user u inner join email e where e.emailID = u.emailID and e.emailAddress = ?",new Object[]{username}, loginRowCallBackHandler);
+		this.jdbcTemplate.query( "select u.*,e.emailAddress from user u inner join email e where e.emailID = u.emailID and e.emailAddress = ? and u.enabled = 'Y'",new Object[]{username}, loginRowCallBackHandler);
 		
 		/*UserBean userDto = this.jdbcTemplate.queryForObject(
 		        "select * from user where UserID = ?",
@@ -49,7 +50,10 @@ public class LoginDAOImpl implements UserDetailsService {
 		if(userDto == null){
 			throw new UsernameNotFoundException("Invalid Credentials. Please try again");
 		}
-		user = new User(userDto.getUserId(), userDto.getPassword(), true, true, true, true, authorities);
+		if(userDto.getEnabled().equals("Y")){
+			enabled = true;
+		}
+		user = new User(userDto.getFirstName(), userDto.getPassword(), enabled , true, true, true, authorities);
 
 		}
 		

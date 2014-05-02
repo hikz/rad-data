@@ -16,24 +16,38 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:h="http://java.sun.com/jsf/html"
 		template="/xhtml/tools/seeContentLayout.xhtml">
-   
+
 		<ui:define name="toolcontent">
 			<table width="900" height="620">
-				<tr>	<td><h:outputText value="#{loginBean.name}"></h:outputText></td></tr>
 				<tr>
-					<td align="center" height="50">Hip converter Page</td>
+					<td align="center" height="20">Hip converter Page</td>
 				</tr>
-				
+
 				<tr>
-					<td  valign="top" align="center">
-						<div>
-							<h:form enctype="multipart/form-data">
-								<h:inputFile value="#{fileUploadBean.inputFile}" requiredMessage="File not selected !!"/>
-								<br/>
-								<h:commandButton value="Upload"
-									action="#{fileUploadBean.upload()}" />															
-							</h:form>
+					<td valign="top" align="center" height="50">
+							<h:form
+							enctype="multipart/form-data" id="hipConverterForm">
+							<h:inputFile id="hipConverterFileId"
+								value="#{fileUploadBean.inputFile}" required="true"
+								requiredMessage="File not selected !!">
+								<f:validator validatorId="FileUploadValidator" />
+							</h:inputFile>
+							<br />
+							<h:commandButton value="Upload"
+								action="#{fileUploadBean.upload()}" />
+						</h:form></td>
 						
+						<td align="left"> <h:form if="downloadHipSampleFileId">  
+                          <h:commandLink id="getDownload" value="Download sample input file"  
+                                     action="#{fileDownloadBean.downLoad}">  
+                                </h:commandLink>  
+                      </h:form> </td>
+				</tr>
+				<tr>
+					<td height="20"><h:message for="hipConverterFileId" style="color: red" /></td>
+				</tr>
+				<tr>
+					<td align="center"><div>
 							<br></br>
 							<h:panelGrid id="hipPanel" columns="2" border="1"
 								rendered="#{fileUploadBean.display}">
@@ -51,20 +65,20 @@
 										<h:outputText value="#{hipOutput.protonCrossSection}" />
 									</h:column>
 								</h:dataTable>
-								
+
 								<rich:panel>
-									<a4j:mediaOutput style="width:450px;height:450px;" 
-										element="img" cacheable="false" session="true"
+									<a4j:mediaOutput type="image/jpeg" classid="toolsChart"
+										style="width:450px;height:450px;" element="img"
+										cacheable="false" session="true"
 										createContent="#{fileUploadBean.drawChart}"
-										mimeType="image/jpeg" >
-										<!-- <f:param name="outputList" value="#{fileUploadBean.hipconverterFinalOutput.hipconverterOutputList}"></f:param> -->
-										</a4j:mediaOutput>
+										mimeType="image/jpeg">
+
+									</a4j:mediaOutput>
 								</rich:panel>
 							</h:panelGrid>
-						</div>
-					</td>
+						</div></td>
 				</tr>
-				<!-- <tr><td><h:messages></h:messages></td></tr> -->
+
 				<!-- <tr><td width="225" align="center"><a href="#">Download Output File</a></td></tr> -->
 			</table>
 		</ui:define>

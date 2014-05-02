@@ -13,61 +13,47 @@
 <title>Register User</title>
 </head>
 <body>
-
-	<ui:composition template="/xhtml/common/seeLayout.xhtml">
+<ui:composition template="/xhtml/common/seeLayout.xhtml">
 		<ui:define name="mainContent">
 			<f:view>
 				<h:form id="seeRegisterFormId" prependId="false">
 					<div id="RegisterFieldsPnlId">
 						<div id="FirstNameId">
 							<h:outputText id="seeFirstNameLblId" value="First Name:"></h:outputText>
-							<h:inputText id="seeFirstNameInId" required="true" value="#{user.firstName}" 
-							requiredMessage="First Name required">
-								<f:validateLength maximum="20"></f:validateLength>
-							</h:inputText>
+							<h:outputText id="seeFirstNameId" value="#{user.firstName}"></h:outputText>
 						</div>
 						<br></br>
 						<div id="LastNameId">
 							<h:outputText id="seeLastNameLblId" value="Last Name:"></h:outputText>
-							<h:inputText id="seeLastNameInId" required="true" value="#{user.lastName}" 
-							 requiredMessage="Last Name required">
-								<f:validateLength maximum="20"></f:validateLength>
-							</h:inputText>
+							<h:outputText id="seeLastNameId" value="#{user.lastName}" ></h:outputText>
 						</div>
 						<br></br>
 						<div id="MobileNumberId">
 							<h:outputText id="seeMobileNumberLblId" value="Mobile Number:"></h:outputText>
-							<h:inputText id="seeMobileNumberInId" required="true" value="#{user.mobileNumber}" 
-							requiredMessage="Last Name required">
-								<f:validateLength maximum="10"></f:validateLength>
-							</h:inputText>
+							<h:outputText id="seeMobileNumberId" value="#{user.mobileNumber}" ></h:outputText>
 						</div>
 						<br></br>
 						<div id="EmailAddressId">
 							<h:outputText id="seeEmailAddressLblId" value="Email Address:"></h:outputText>
-							<h:inputText id="seeEmailAddressInId" value="#{user.email.emailAddress}"
-								required="true" requiredMessage="Email Address required">
-								<f:validateRegex
-									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-							</h:inputText>
+							<h:outputText id="seeEmailAddressId" value="#{user.email.emailAddress}"></h:outputText>
 						</div>
 						<br></br>
 						<div id="loginFieldPasswordContId">
 							<h:outputText id="seePasswordLblId" value="Password:"></h:outputText>
-							<h:inputSecret id="seePasswordInId" required="true" 
-							value="#{user.password}" requiredMessage="Please enter password"></h:inputSecret>
+							<h:outputText id="seePasswordId" value="#{user.password}"></h:outputText>
 						</div>
 					</div>
 					<br></br>
 					<div id="loginBtnPanelId">
-						<h:commandButton value="Register" action="#{registerBean.confirmRegistration}"></h:commandButton>
+						<h:commandButton value="Confirm" action="#{registerBean.register}"></h:commandButton>
+					 	<h:commandLink action="#{navigator.navigate}" value="Click me to register">
+							 <f:param name="fromTool" value="register" /> 
+						</h:commandLink>
 					</div>
 				</h:form>
 				<h:messages></h:messages>
 			</f:view>
 		</ui:define>
 	</ui:composition>
-
-
 </body>
 </html>

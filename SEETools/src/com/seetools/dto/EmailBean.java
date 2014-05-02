@@ -1,9 +1,16 @@
 package com.seetools.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
-public class EmailBean {
+public class EmailBean implements Serializable {
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String emailID;
 	private String emailAddress;
 	private String createdByUserId;

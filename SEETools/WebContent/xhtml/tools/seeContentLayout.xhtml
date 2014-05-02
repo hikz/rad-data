@@ -3,7 +3,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:a4j="http://richfaces.org/a4j">
 
@@ -20,22 +19,31 @@
 		template="/xhtml/common/seeLayout.xhtml">
 
 		<ui:define name="mainContent">
-		
+		<h:outputStylesheet>
+        .rf-ac {
+        width: 200px;
+        }
+ 
+        .rf-ac-itm-c {
+        height: 220px;
+        }
+    </h:outputStylesheet>
 			<div id="page" align="center" style="width: 1300; height: 590">
 				<table style="border: thin solid black;">
 					<tr>
 						<td>
 							<table>
 								<tr>
-									<td width="200" style="vertical-align: top">
+									<td width="200" style="vertical-align: top">	
 										<!-- <ui:include src="/xhtml/tools/seeToolsMenu.xhtml"/>  -->
-
+										<table><tr><td>Welcome   <B><h:outputText value="#{loginBean.username}"/></B></td></tr></table>
 										<h:form>
 											<div style="vertical-align: top; border-color: red">
 											
 												<rich:accordion switchType="client">
+												 
 													<rich:accordionItem header="Proton Ions">
-														<ul>
+														<ul style="list-style-type: square;">
 															<li><h:commandLink action="#{navigator.navigate}"
 																	value="HIP Converter 1">
 																	<f:param name="fromTool" value="hipConverter" />

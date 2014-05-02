@@ -2,24 +2,21 @@ package com.seetools.presentation;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import com.seetools.businesslayer.SeeToolsRegisterServiceImpl;
 import com.seetools.dto.UserBean;
+import com.seetools.presentation.common.SessionManager;
 
 @ManagedBean(name="registerBean")
-@ViewScoped
+@SessionScoped
 public class RegisterBean implements Serializable {
 
 	/**
@@ -32,33 +29,37 @@ public class RegisterBean implements Serializable {
 	 @Autowired 
 	 private UserDetailsService userDetailsSvc;
 	 
-	 private UserBean user = new UserBean();
+	 @ManagedProperty(value="#{user}")
+	 private UserBean user;
 	 
-	    
+	 
+	public String confirmRegistration(){
+		System.out.println("sending to confirm registration");
+		this.setUser((UserBean)SessionManager.getSessionAttribute("user"));
+		SessionManager.addSessionAttribute("user",this.user);
+		return "confirmRegistration";
+	}
 	
-	 @PostConstruct
-	    public void init() {
-	        user = new UserBean();
-	    }
-	 
-	 
+	
 	public String register(){
 		
-		
 		SeeToolsRegisterServiceImpl seeToolsRegisterServiceImpl = new SeeToolsRegisterServiceImpl();
-		user = seeToolsRegisterServiceImpl.processRegistration(user);
+		this.setUser((UserBean)SessionManager.getSessionAttribute("user"));
+		user = seeToolsRegisterServiceImpl.processRegistration(this.getUser());
 		
 		try {
-		      UserDetails userDetails = userDetailsSvc.loadUserByUsername(user.getUserId());
-		      UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user.getUserId(), user.getPassword(), userDetails.getAuthorities());
-		      authMgr.authenticate(auth);
+			  System.out.println("Before load method");
+		      //UserDetails userDetails = userDetailsSvc.loadUserByUsername(user.getEmail().getEmailAddress());
+		     // UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user.getEmail().getEmailAddress(), user.getPassword(), userDetails.getAuthorities());
+		     // System.out.println("After load method");
+		     // authMgr.authenticate(auth);
 		 
 		      // redirect into secured main page if authentication successful
-		      if(auth.isAuthenticated()) {
-		        SecurityContextHolder.getContext().setAuthentication(auth);
-		        System.out.println("session id - " + RequestContextHolder.currentRequestAttributes().getSessionId());
+		     // if(auth.isAuthenticated()) {
+		      //  SecurityContextHolder.getContext().setAuthentication(auth);
+		      //  System.out.println("session id - " + RequestContextHolder.currentRequestAttributes().getSessionId());
 		        return "registerSuccess";
-		      }
+		     // }
 		    } catch (Exception e) {
 		      //logger.debug("Problem authenticating user" + userDto.getUserId(), e);
 		    	e.printStackTrace();

@@ -22,7 +22,7 @@
 					<div id="loginFieldsPnlId">
 						<div id="loginFieldUsrContId">
 							<h:outputText id="seeUserNameId" value="Email Address:"></h:outputText>
-							<h:inputText id="tools_username" required="true" requiredMessage="Email Address is mandatory">
+							<h:inputText id="tools_username" required="true" value="#{loginBean.email}" requiredMessage="Email Address is mandatory">
 								<!-- <f:validateLength minimum="2" maximum="6"></f:validateLength> -->
 								<f:validateRegex 
 									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -31,7 +31,7 @@
 						</div>
 						<div id="loginFieldPasswordContId">
 							<h:outputText id="seePasswordId" value="Password:" ></h:outputText>
-							<h:inputSecret id="tools_password" required="true" requiredMessage="Password is mandatory"></h:inputSecret>
+							<h:inputSecret id="tools_password" required="true" value="#{loginBean.password}" requiredMessage="Password is mandatory"></h:inputSecret>
 							<h:message for="tools_password"></h:message>
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 					</div>
 					
 						
-					No Account?  <h:commandLink action="#{navigator.navigate}" value="Click me to register">
+					No Account?  <h:commandLink action="#{navigator.navigate}" value="Click me to register" immediate="true">
 										 <f:param name="fromTool" value="register" /> 
 										</h:commandLink>
 					</div>

@@ -1,9 +1,19 @@
 package com.seetools.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class UserBean {
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
+@ManagedBean(name="user")
+@SessionScoped
+public class UserBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String password;
 	
@@ -15,6 +25,7 @@ public class UserBean {
 	private Timestamp createdDate;
 	private String modifiedByUserId;
 	private Timestamp modifiedDate;
+	private String enabled;
 	
 	private EmailBean email = new EmailBean();
 	
@@ -83,6 +94,15 @@ public class UserBean {
 		return email;
 	}
 	public void setEmailDto(EmailBean email) {
+		this.email = email;
+	}
+	public String getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
+	public void setEmail(EmailBean email) {
 		this.email = email;
 	}
 	

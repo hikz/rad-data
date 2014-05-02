@@ -54,14 +54,27 @@
     
      <navigation-rule>
     	<display-name>pages/home/</display-name>
-    	<from-view-id>/xhtml/login/register.xhtml</from-view-id>
+    	<from-view-id>/xhtml/login/confirmRegistration.xhtml</from-view-id>
     	<navigation-case>
     		<from-action>#{registerBean.register}</from-action>
     		<from-outcome>registerSuccess</from-outcome>
-    		<to-view-id>/xhtml/tools/hipConverterTool.xhtml</to-view-id>
+    		<to-view-id>/xhtml/login/registrationSuccess.xhtml</to-view-id>
     		<redirect></redirect>
     	</navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>pages/home/</display-name>
+    	<from-view-id>/xhtml/login/register.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-action>#{registerBean.confirmRegistration}</from-action>
+    		<from-outcome>confirmRegistration</from-outcome>
+    		<to-view-id>/xhtml/login/confirmRegistration.xhtml</to-view-id>
+    		<redirect></redirect>
+    	</navigation-case>
+    </navigation-rule>
+    
+    
     <!-- Global Navigation Rule  -->
     <navigation-rule>
     	<display-name>pages/home/</display-name>
